@@ -28,6 +28,39 @@
   color: #61dafb;
 }
 
+.header {
+  background-color: purple;
+  color: white;
+  font: 25px copperplate;
+  height: 10vh;
+  /* font-size: 25px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search {
+  height: 30px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-button {
+  margin-left: 10px;
+  background-color: blueviolet;
+  border: none;
+  color: white;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

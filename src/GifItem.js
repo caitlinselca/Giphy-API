@@ -3,7 +3,7 @@ import React from "react";
 const GifItem = props => {
 	return (
 		<li>
-			<img src={props.gif.embed_url} />
+			<img src={props.gif.url} />
 			{/* <iframe
 				src={props.gif.embed_url}
 				width="480"

@@ -33,7 +33,6 @@
   color: white;
   font: 25px copperplate;
   height: 10vh;
-  /* font-size: 25px; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,6 +58,57 @@
   font-size: 16px;
   cursor: pointer;
   border-radius: 25px;
+}
+
+.gif-item {
+  box-shadow: 1px 1px 2px 0 #ccc;
+  box-sizing: border-box;
+  display: flex;
+  padding: 1em;
+}
+
+.gif-item img {
+  width: 100%;
+}
+
+.gif-list {
+  column-gap: 1.5em;
+  font-size: .85em;
+  margin: 1.5em 0;
+  padding: 0;
+}
+
+
+@media only screen and (min-width: 400px) {
+  .gif-list {
+      -moz-column-count: 1;
+      -webkit-column-count: 1;
+      column-count: 1;
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  .gif-list {
+      -moz-column-count: 1;
+      -webkit-column-count: 1;
+      column-count: 1;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .gif-list {
+      -moz-column-count: 2;
+      -webkit-column-count: 2;
+      column-count: 2;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .gif-list {
+      -moz-column-count: 3;
+      -webkit-column-count: 3;
+      column-count: 3;
+  }
 }
 
 @keyframes App-logo-spin {

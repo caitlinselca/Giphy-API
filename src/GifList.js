@@ -6,7 +6,7 @@ const GifList = props => {
 		return <GifItem key={image.id} gif={image} />;
 	});
 
-	return <ul>{gifItems}</ul>;
+	return <div className="gif-list">{gifItems}</div>;
 };
 
 export default GifList;

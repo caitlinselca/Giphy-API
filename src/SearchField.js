@@ -5,7 +5,7 @@ import GifList from "./GifList";
 class SearchBar extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { term: "", gifs: [] };
+		this.state = { term: "", gifs: [], isError: false };
 	}
 
 	handleChange = e => {

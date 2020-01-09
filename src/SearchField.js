@@ -1,10 +1,11 @@
 import React from "react";
 import axios from "axios";
+import GifList from "./GifList";
 
 class SearchBar extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { term: "" };
+		this.state = { term: "", gifs: [] };
 	}
 
 	handleChange = e => {
@@ -22,6 +23,7 @@ class SearchBar extends React.Component {
 			.then(res => {
 				let data = res.data.data;
 				data.forEach(d => console.log(d));
+				this.setState({ gifs: data });
 			})
 			.catch(e => {
 				console.log(e);
@@ -54,6 +56,7 @@ class SearchBar extends React.Component {
 						Search
 					</button>
 				</div>
+				<GifList gifs={this.state.gifs}></GifList>
 			</div>
 		);
 	}

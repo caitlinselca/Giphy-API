@@ -7,7 +7,7 @@ const GifItem = image => {
 				src={image.gif.embed_url}
 				title={image.gif.id}
 				frameBorder="0"
-				class="giphy-embed"
+				className="giphy-embed"
 			></iframe>
 		</div>
 	);

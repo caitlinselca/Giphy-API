@@ -18,6 +18,7 @@ class SearchBar extends React.Component {
 		this.state = {
 			term: "",
 			gifs: [],
+			rating: "",
 			isError: false,
 			mode: "trending",
 			pageNumber: 0,
@@ -30,12 +31,16 @@ class SearchBar extends React.Component {
 	}
 
 	callGiphyAPI = (direction = 1) => {
-		const { mode, pageNumber, gifsPerPage } = this.state;
+		const { rating, mode, pageNumber, gifsPerPage } = this.state;
 		let url;
 		let params = {
 			limit: gifsPerPage,
 			offset: (pageNumber + direction) * gifsPerPage
 		};
+
+		if (rating !== "") {
+			params["rating"] = rating;
+		}
 
 		if (mode === "trending") {
 			url = `http://api.giphy.com/v1/gifs/trending?api_key=${API_KEY}`;
@@ -46,6 +51,7 @@ class SearchBar extends React.Component {
 		axios
 			.get(url, { params: params })
 			.then(res => {
+				console.log(res);
 				if (mode === "trending") {
 					this.setState({
 						gifs: res.data.data,
@@ -106,6 +112,12 @@ class SearchBar extends React.Component {
 		}
 	};
 
+	handleRandomChange = j => {
+		this.setState({
+			rating: j.target.value
+		});
+	};
+
 	render() {
 		return (
 			<div className="container">
@@ -136,13 +148,29 @@ class SearchBar extends React.Component {
 						>
 							Prev
 						</button>
-						<h3>{this.state.pageNumber}</h3>
+						<h3>Page: {this.state.pageNumber}</h3>
 						<button
 							onClick={this.handleNextPage}
 							className="pagination-buttons"
 						>
 							Next
 						</button>
+					</div>
+					<div className="filter-sort-container">
+						<h3 className="rating-label">Rating: </h3>
+						<select
+							name="rating"
+							className="filter-by-rating"
+							onChange={this.handleRandomChange}
+						>
+							<option disabled selected value>
+								-- select an option --
+							</option>
+							<option value="g">G</option>
+							<option value="pg">PG</option>
+							<option value="pg-13">PG-13</option>
+							<option value="r">R</option>
+						</select>
 					</div>
 				</div>
 				<GifList gifs={this.state.gifs}></GifList>

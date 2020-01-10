@@ -13,7 +13,7 @@ class SearchBar extends React.Component {
 			isError: false,
 			mode: "trending",
 			pageNumber: 0,
-			gifsPerPage: 24
+			gifsPerPage: 15
 		};
 	}
 
@@ -69,8 +69,24 @@ class SearchBar extends React.Component {
 		});
 	};
 
+	handleEnter = e => {
+		if (e.keyCode === 13) {
+			this.setState({ mode: "search", pageNumber: 0 }, () =>
+				this.callGiphyAPI()
+			);
+		}
+	};
+
 	handleSubmit = mode => {
-		this.setState({ mode: mode, pageNumber: 0 }, () => this.callGiphyAPI());
+		this.setState({ mode: "search", pageNumber: 0 }, () =>
+			this.callGiphyAPI()
+		);
+	};
+
+	handleHeaderClick = e => {
+		this.setState({ mode: "trending", pageNumber: 0, term: "" }, () =>
+			this.callGiphyAPI()
+		);
 	};
 
 	handleNextPage = e => {
@@ -86,21 +102,20 @@ class SearchBar extends React.Component {
 		return (
 			<div>
 				<div className="header">
-					<h1 onClick={() => this.handleSubmit("trending")}>
-						Gif Search Engine
-					</h1>
+					<h1 onClick={this.handleHeaderClick}>Gif Search Engine</h1>
 				</div>
-				<div className="search">
+				<div className="search-container">
 					<input
 						type="string"
 						value={this.state.term}
 						name="term"
 						className="input-field"
 						onChange={this.handleChange}
+						onKeyDown={this.handleEnter}
 					></input>
 					<button
 						className="search-button"
-						onClick={() => this.handleSubmit("search")}
+						onClick={this.handleSubmit}
 					>
 						Search
 					</button>

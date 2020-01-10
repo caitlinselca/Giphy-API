@@ -12,7 +12,7 @@
 	justify-content: center;
 }
 
-.search {
+.search-container {
 	height: 30px;
 	font-size: 16px;
 	display: flex;
@@ -36,6 +36,13 @@
 	border-radius: 25px;
 }
 
+.gif-list {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+}
+
 .gif-item {
 	box-shadow: 1px 1px 2px 0 #ccc;
 	box-sizing: border-box;
@@ -43,23 +50,18 @@
 	padding: 1em;
 	align-items: center;
 	justify-content: center;
-}
-
-.gif-list {
-	display: flex;
-	flex-wrap: wrap;
-}
-
-.pagination-container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	margin: 20px;
 }
 
 .giphy-embed {
 	position: relative;
 	height: 100%;
 	width: 100%;
+}
+.pagination-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .pagination-buttons {

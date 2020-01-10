@@ -8,7 +8,6 @@ const GifItem = image => {
 				title={image.gif.id}
 				frameBorder="0"
 				class="giphy-embed"
-				allowFullScreen
 			></iframe>
 		</div>
 	);

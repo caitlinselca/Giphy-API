@@ -112,36 +112,38 @@ class SearchBar extends React.Component {
 				<div className="header">
 					<h1 onClick={this.handleHeaderClick}>Gif Search Engine</h1>
 				</div>
-				<div className="search-container">
-					<input
-						type="string"
-						value={this.state.term}
-						name="term"
-						className="input-field"
-						onChange={this.handleChange}
-						onKeyDown={this.handleEnter}
-					></input>
-					<button
-						className="search-button"
-						onClick={this.handleSubmit}
-					>
-						Search
-					</button>
-				</div>
-				<div className="pagination-container">
-					<button
-						onClick={this.handlePrevPage}
-						className="pagination-buttons"
-					>
-						Prev
-					</button>
-					<h3>{this.state.pageNumber}</h3>
-					<button
-						onClick={this.handleNextPage}
-						className="pagination-buttons"
-					>
-						Next
-					</button>
+				<div className="info-container">
+					<div className="search-container">
+						<input
+							type="string"
+							value={this.state.term}
+							name="term"
+							className="input-field"
+							onChange={this.handleChange}
+							onKeyDown={this.handleEnter}
+						></input>
+						<button
+							className="search-button"
+							onClick={this.handleSubmit}
+						>
+							Search
+						</button>
+					</div>
+					<div className="pagination-container">
+						<button
+							onClick={this.handlePrevPage}
+							className="pagination-buttons"
+						>
+							Prev
+						</button>
+						<h3>{this.state.pageNumber}</h3>
+						<button
+							onClick={this.handleNextPage}
+							className="pagination-buttons"
+						>
+							Next
+						</button>
+					</div>
 				</div>
 				<GifList gifs={this.state.gifs}></GifList>
 			</div>

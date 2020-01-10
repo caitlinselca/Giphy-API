@@ -51,6 +51,7 @@ class SearchBar extends React.Component {
 			rating: "",
 			lang: "",
 			isError: false,
+			mode: "trending",
 			pageNumber: 0,
 			gifsPerPage: 15,
 			sortByDate: false,
@@ -118,10 +119,12 @@ class SearchBar extends React.Component {
 						pageNumber: pageNumber + direction,
 						isError: false
 					});
-			.catch(err => {
+				}
+			})
+			.catch(e => {
 				this.setState({ isError: true, gifs: [] });
 			});
-	}
+	};
 
 	handleChange = e => {
 		this.setState({
@@ -147,46 +150,19 @@ class SearchBar extends React.Component {
 		}
 	};
 
-	handleSubmit = e => {
-		axios
-			.get(
-				`http://api.giphy.com/v1/gifs/search?q=${this.state.term.toUpperCase()}&rating=${this.state.rating}&api_key=mLxD4Hc77uYnY3b5VTGOm64fNtmh3CIA`
-			)
-			.then(res => {
-				let data = res.data.data.map(image => {
-					return {
-						id: image.id,
-						embed_url: image.embed_url,
-						rating: image.rating
-					};
-				});
-				this.setState({ gifs: data, isError: false });
-			})
-			.catch(e => {
-				this.setState({ isError: true, gifs: [] });
-			});
+	handleHeaderClick = e => {
+		this.setState({ mode: "trending", pageNumber: 0, term: "" }, () =>
+			this.callGiphyAPI()
+		);
 	};
 
-	handleBottom = e => {
-		axios
-			.get(
-				"http://api.giphy.com/v1/gifs/trending?api_key=mLxD4Hc77uYnY3b5VTGOm64fNtmh3CIA",
-				{
-					params: {
-						limit: this.state.itemsPerPage,
-						offset: this.state.pageNumber * this.state.itemsPerPage
-					}
-				}
-			)
-			.then(trendinggifs => {
-				this.setState({
-					gifs: this.state.gifs.concat(trendinggifs.data.data),
-					pageNumber: this.state.pageNumber + 1
-				});
-			})
-			.catch(err => {
-				this.setState({ isError: true, gifs: [] });
-			});
+	handleNextPage = e => {
+		this.callGiphyAPI();
+	};
+	handlePrevPage = e => {
+		if (this.state.pageNumber > 1) {
+			this.callGiphyAPI(-1);
+		}
 	};
 
 	handleRatingChange = j => {
@@ -229,7 +205,7 @@ class SearchBar extends React.Component {
 		return (
 			<div className="container">
 				<div className="header">
-					<h1> Gif Search Engine </h1>
+					<h1 onClick={this.handleHeaderClick}>Gif Search Engine</h1>
 				</div>
 				<div className="info-container">
 					<div className="search-container">
@@ -266,9 +242,6 @@ class SearchBar extends React.Component {
 					</div>
 					<div className="filter-sort-container">
 						<div className="filter-container">
-							<div className="filter-header">
-								<h2 style={{ margin: 0 }}>Filters:</h2>
-							</div>
 							<div className="filter-content">
 								<div className="filter">
 									<h3 className="filter-label">Rating: </h3>

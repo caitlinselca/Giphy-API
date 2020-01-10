@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-import GifList from "./GifList";
 import GifItem from "./GifItem";
+import GifList from "./GifList";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 class SearchBar extends React.Component {

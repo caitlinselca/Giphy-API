@@ -6,6 +6,7 @@ const GifItem = image => {
 			<iframe
 				src={image.gif.embed_url}
 				title={image.gif.id}
+				rating={image.gif.rating}
 				frameBorder="0"
 				class="giphy-embed"
 				allowFullScreen

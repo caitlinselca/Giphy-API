@@ -51,7 +51,7 @@ class SearchBar extends React.Component {
 		});
     };
 
-	handleSubmit = e => {
+    handleSubmit = e => {
 		axios
 			.get(
 				`http://api.giphy.com/v1/gifs/search?q=${this.state.term.toUpperCase()}&rating=${this.state.rating}&api_key=mLxD4Hc77uYnY3b5VTGOm64fNtmh3CIA`
@@ -93,19 +93,55 @@ class SearchBar extends React.Component {
 			});
 	};
 
+	handleChange = e => {
+		this.setState({
+			term: e.target.value
+		});
+	};
+
+	handleEnter = e => {
+		if (e.keyCode === 13) {
+			this.setState({ mode: "search", pageNumber: 0 }, () =>
+				this.callGiphyAPI()
+			);
+		}
+	};
+
+	handleSubmit = mode => {
+		this.setState({ mode: "search", pageNumber: 0 }, () =>
+			this.callGiphyAPI()
+		);
+	};
+
+	handleHeaderClick = e => {
+		this.setState({ mode: "trending", pageNumber: 0, term: "" }, () =>
+			this.callGiphyAPI()
+		);
+	};
+
+	handleNextPage = e => {
+		this.callGiphyAPI();
+	};
+	handlePrevPage = e => {
+		if (this.state.pageNumber > 1) {
+			this.callGiphyAPI(-1);
+		}
+	};
+
 	render() {
 		return (
 			<div>
 				<div className="header">
-					<h1> Gif Search Engine </h1>
+					<h1 onClick={this.handleHeaderClick}>Gif Search Engine</h1>
 				</div>
-				<div className="search">
+				<div className="search-container">
 					<input
 						type="string"
 						value={this.state.term}
 						name="term"
 						className="input-field"
 						onChange={this.handleChange}
+						onKeyDown={this.handleEnter}
 					></input>
                      <select name="rating" class="filter-by-rating" onChange={this.handleRandomChange} >
                         <option value="" select></option>

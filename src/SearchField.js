@@ -1,8 +1,16 @@
 import React from "react";
 import axios from "axios";
-import GifList from "./GifList";
+import GifItem from "./GifItem";
 
 const API_KEY = "mLxD4Hc77uYnY3b5VTGOm64fNtmh3CIA";
+
+const GifList = props => {
+	const gifItems = props.gifs.map(image => {
+		return <GifItem key={image.id} gif={image} />;
+	});
+
+	return <div className="gif-list">{gifItems}</div>;
+};
 
 class SearchBar extends React.Component {
 	constructor(props) {

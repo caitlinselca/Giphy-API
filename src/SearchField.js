@@ -3,10 +3,28 @@ import axios from "axios";
 import GifList from "./GifList";
 
 class SearchBar extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = { term: "", gifs: [], isError: false };
-	}
+    constructor(props) {
+        super(props);
+        this.state = {
+          term: '',
+          gifs: [],
+          isError: false
+        };
+      }
+
+      componentDidMount(){
+        axios.get(
+            'http://api.giphy.com/v1/gifs/trending?api_key=mLxD4Hc77uYnY3b5VTGOm64fNtmh3CIA'
+        )
+          .then(trendinggifs => {
+            this.setState({
+              gifs: trendinggifs.data.data
+            })
+          })
+          .catch(err => {
+            this.setState({ isError: true, gifs: [] });
+          });
+      }
 
 	handleChange = e => {
 		this.setState({
@@ -15,7 +33,6 @@ class SearchBar extends React.Component {
 	};
 
 	handleSubmit = e => {
-		console.log("Search Gifs: " + this.state.term);
 		axios
 			.get(
 				`http://api.giphy.com/v1/gifs/search?q=${this.state.term.toUpperCase()}&api_key=mLxD4Hc77uYnY3b5VTGOm64fNtmh3CIA`
@@ -30,7 +47,6 @@ class SearchBar extends React.Component {
 				this.setState({gifs: data, isError: false});
 			})
 			.catch(e => {
-                // console.log(e);
                 this.setState({ isError: true, gifs: [] });
 			});
 	};

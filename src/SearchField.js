@@ -108,7 +108,7 @@ class SearchBar extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="container">
 				<div className="header">
 					<h1 onClick={this.handleHeaderClick}>Gif Search Engine</h1>
 				</div>

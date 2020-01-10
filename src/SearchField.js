@@ -9,8 +9,8 @@ class SearchBar extends React.Component {
 		super(props);
 		this.state = {
 			term: "",
-            gifs: [],
-            rating: "",
+			gifs: [],
+			rating: "",
 			isError: false,
 			pageNumber: 0,
 			itemsPerPage: 15
@@ -108,12 +108,12 @@ class SearchBar extends React.Component {
 						onChange={this.handleChange}
 					></input>
 					<select name="rating" class="filter-by-rating" onChange={this.handleRandomChange} >
-                        <option value="" select></option>
-                        <option value="g" select>G</option>
-                        <option value="pg" select>PG</option>
-                        <option value="pg-13" select>PG-13</option>
-                        <option value="r" select>R</option>
-                    </select>
+						<option value="" select></option>
+						<option value="g" select>G</option>
+						<option value="pg" select>PG</option>
+						<option value="pg-13" select>PG-13</option>
+						<option value="r" select>R</option>
+					</select>
 					<button
 						className="search-button"
 						onClick={this.handleSubmit}

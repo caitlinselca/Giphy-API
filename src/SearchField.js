@@ -43,15 +43,15 @@ class SearchBar extends React.Component {
 		this.setState({
 			term: e.target.value
 		});
-    };
-    
-    handleRandomChange = j => {
+	};
+
+	handleRandomChange = j => {
 		this.setState({
 			rating: j.target.value
 		});
     };
 
-    handleSubmit = e => {
+	handleSubmit = e => {
 		axios
 			.get(
 				`http://api.giphy.com/v1/gifs/search?q=${this.state.term.toUpperCase()}&rating=${this.state.rating}&api_key=mLxD4Hc77uYnY3b5VTGOm64fNtmh3CIA`
@@ -60,8 +60,8 @@ class SearchBar extends React.Component {
 				let data = res.data.data.map(image => {
 					return {
 						id: image.id,
-                        embed_url: image.embed_url,
-                        rating: image.rating
+						embed_url: image.embed_url,
+						rating: image.rating
 					};
 				});
 				this.setState({ gifs: data, isError: false });
@@ -93,57 +93,21 @@ class SearchBar extends React.Component {
 			});
 	};
 
-	handleChange = e => {
-		this.setState({
-			term: e.target.value
-		});
-	};
-
-	handleEnter = e => {
-		if (e.keyCode === 13) {
-			this.setState({ mode: "search", pageNumber: 0 }, () =>
-				this.callGiphyAPI()
-			);
-		}
-	};
-
-	handleSubmit = mode => {
-		this.setState({ mode: "search", pageNumber: 0 }, () =>
-			this.callGiphyAPI()
-		);
-	};
-
-	handleHeaderClick = e => {
-		this.setState({ mode: "trending", pageNumber: 0, term: "" }, () =>
-			this.callGiphyAPI()
-		);
-	};
-
-	handleNextPage = e => {
-		this.callGiphyAPI();
-	};
-	handlePrevPage = e => {
-		if (this.state.pageNumber > 1) {
-			this.callGiphyAPI(-1);
-		}
-	};
-
 	render() {
 		return (
 			<div>
 				<div className="header">
-					<h1 onClick={this.handleHeaderClick}>Gif Search Engine</h1>
+					<h1> Gif Search Engine </h1>
 				</div>
-				<div className="search-container">
+				<div className="search">
 					<input
 						type="string"
 						value={this.state.term}
 						name="term"
 						className="input-field"
 						onChange={this.handleChange}
-						onKeyDown={this.handleEnter}
 					></input>
-                     <select name="rating" class="filter-by-rating" onChange={this.handleRandomChange} >
+					<select name="rating" class="filter-by-rating" onChange={this.handleRandomChange} >
                         <option value="" select></option>
                         <option value="g" select>G</option>
                         <option value="pg" select>PG</option>

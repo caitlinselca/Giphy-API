@@ -106,9 +106,19 @@ class SearchBar extends React.Component {
 					</button>
 				</div>
 				<div className="pagination-container">
-					<button onClick={this.handlePrevPage}>Prev</button>
-					<p>{this.state.pageNumber}</p>
-					<button onClick={this.handleNextPage}>Next</button>
+					<button
+						onClick={this.handlePrevPage}
+						className="pagination-buttons"
+					>
+						Prev
+					</button>
+					<h3>{this.state.pageNumber}</h3>
+					<button
+						onClick={this.handleNextPage}
+						className="pagination-buttons"
+					>
+						Next
+					</button>
 				</div>
 				<GifList gifs={this.state.gifs}></GifList>
 			</div>
